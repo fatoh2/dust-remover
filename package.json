@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "server": "ts-node server/server.ts",
+    "server": "tsx server/server.ts",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -42,7 +42,7 @@
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
-    "vite": "^6.2.5"
+    "vite": "^6.3.5"
   },
   "description": "This dApp was created using `@mysten/create-dapp` that sets up a basic React Client dApp using the following tools:",
   "main": "index.js",

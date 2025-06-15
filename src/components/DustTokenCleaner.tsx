@@ -23,6 +23,7 @@ import { SwapOrBurnDialog } from "./SwapOrBurnDialog";
 import { executeSwapOrBurn } from "../helpers/executeSwapOrBurn";
 import { Token } from "../types/Token";
 import { TokenBalance } from "../types/TokenBalance";
+import styles from "./DustTokenCleaner.module.css";
 
 // import { getBestSwapQuote } from "../utils/DexAggregator"; // Import the best swap quote function
 
@@ -53,7 +54,9 @@ export function DustTokenCleaner() {
       const balanceResponse = await fetch("http://localhost:3001/api/get-balance")
       .then((res) => res.json())
       .then((data: TokenBalance[]) => {
-        setTokens(data);
+        // Sort by balanceUsd (USD value) descending
+        const sorted = [...data].sort((a, b) => (b.balanceUsd ?? 0) - (a.balanceUsd ?? 0));
+        setTokens(sorted);
         setLoading(false);
       })
       .catch((err) => {
@@ -231,15 +234,31 @@ export function DustTokenCleaner() {
         <Text>No tokens found 🎉</Text>
       ) : (
         <>
-          <table className="w-full table-auto border-collapse mt-4">
+          <table className={styles.wideTable + " w-full table-auto border-collapse mt-4"}>
           <thead>
             <tr className="bg-gray-100">
-              <th className="p-2 text-left">Symbol</th>
-              <th className="p-2 text-left">Name</th>
-              <th className="p-2 text-left">Balance</th>
-              <th className="p-2 text-left">USD</th>
-              <th className="p-2 text-left">Price</th>
-              <th className="p-2 text-center">Select</th>
+              <th className="p-2 text-left">
+                <Flex gap="2" align="center">Symbol
+                </Flex>
+                </th>
+              <th className="p-2 text-left">
+                <Flex gap="2" align="center">Name
+                  </Flex>
+                </th>
+              <th className="p-2 text-left">
+                <Flex gap="2" align="center">Balance
+                </Flex></th>
+              <th className="p-2 text-left">
+                <Flex gap="2" align="center">USD
+                  </Flex>
+                </th>
+              <th className="p-2 text-left">
+                <Flex gap="2" align="center">Price
+                </Flex></th>
+              <th className="p-2 text-left">
+                <Flex gap="2" align="center">Select
+                  </Flex>
+                </th>
             </tr>
           </thead>
           <tbody>

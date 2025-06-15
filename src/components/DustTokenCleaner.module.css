@@ -1,0 +1,12 @@
+.wideTable {
+  width: 100%;
+  min-width: 900px;
+  max-width: 100vw;
+  table-layout: auto;
+}
+
+.wideTable th, .wideTable td {
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: center;
+}
